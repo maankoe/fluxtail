@@ -1,7 +1,5 @@
 package fluxtail.io;
 
-import fluxtail.TailHandler;
-
 import java.io.IOException;
 import java.nio.file.Path;
 
@@ -45,7 +43,7 @@ public class TailReader {
     private void read(RABReader reader) throws IOException {
         int x = reader.read();
         while (x >= 0) {
-            this.handler.handle((char) x);
+            this.handler.accept((char) x);
             x = reader.read();
         }
     }

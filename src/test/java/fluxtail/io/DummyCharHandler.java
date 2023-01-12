@@ -1,7 +1,5 @@
 package fluxtail.io;
 
-import fluxtail.TailHandler;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +8,7 @@ public class DummyCharHandler implements TailHandler  {
     private final List<Exception> exceptions = new ArrayList<>();
 
     @Override
-    public void handle(char x) {
+    public void accept(char x) {
         this.characters().add(x);
     }
 

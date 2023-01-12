@@ -1,5 +1,6 @@
 package fluxtail;
 
+import fluxtail.io.TailHandler;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Sinks;
 
@@ -16,7 +17,7 @@ public class FluxCharHandler implements TailHandler, Fluxable<Character> {
     }
 
     @Override
-    public void handle(char x) {
+    public void accept(char x) {
         Sinks.EmitResult result = this.characters.tryEmitNext(x);
         if (result.isFailure()) {
             throw new IllegalStateException("This flux is in a bad state", this.handledException);

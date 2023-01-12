@@ -10,9 +10,9 @@ public class TestFluxCharHandler {
     @Test
     public void testHandle() {
         FluxCharHandler handler = new FluxCharHandler();
-        handler.handle('a');
-        handler.handle('b');
-        handler.handle('c');
+        handler.accept('a');
+        handler.accept('b');
+        handler.accept('c');
         StepVerifier.create(handler.flux())
                 .expectNext('a', 'b', 'c')
                 .thenCancel()
@@ -31,7 +31,7 @@ public class TestFluxCharHandler {
     @Test
     public void testHandleException() {
         FluxCharHandler handler = new FluxCharHandler();
-        handler.handle('a');
+        handler.accept('a');
         handler.exception(new Exception("message"));
         StepVerifier.create(handler.flux())
                 .expectNext('a')
@@ -42,10 +42,10 @@ public class TestFluxCharHandler {
     @Test
     public void testHandleExceptionHandle() {
         FluxCharHandler handler = new FluxCharHandler();
-        handler.handle('a');
+        handler.accept('a');
         Exception cause = new Exception("message");
         handler.exception(cause);
-        Exception exception = catchException(() -> handler.handle('b'));
+        Exception exception = catchException(() -> handler.accept('b'));
         assertThat(exception)
                 .isInstanceOf(IllegalStateException.class)
                 .hasCause(cause);

@@ -1,7 +1,7 @@
-package fluxtail;
+package fluxtail.io;
 
 public interface TailHandler {
-    void handle(char x);
+    void accept(char x);
 
     void exception(Exception exception);
 }
