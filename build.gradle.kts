@@ -21,7 +21,6 @@ dependencies {
     implementation("io.projectreactor:reactor-core:3.5.2")
     implementation("org.assertj:assertj-core:3.23.1")
     implementation("org.junit.jupiter:junit-jupiter:5.8.1")
-    implementation("org.mockito:mockito-core:4.8.1")
     testImplementation("io.projectreactor:reactor-test:3.5.2")
     testImplementation("maankoe:patiently:0.1")
 }
