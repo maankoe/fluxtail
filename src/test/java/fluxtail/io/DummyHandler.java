@@ -3,7 +3,7 @@ package fluxtail.io;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DummyCharHandler implements TailHandler  {
+public class DummyHandler implements TailHandler {
     private final List<Character> characters = new ArrayList<>();
     private final List<Exception> exceptions = new ArrayList<>();
 

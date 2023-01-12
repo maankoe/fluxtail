@@ -27,7 +27,7 @@ public class TestTailReader {
     public void testRead() throws Exception {
         String fileContents = "abc";
         writeToFile(this.testPath, fileContents);
-        DummyCharHandler handler = new DummyCharHandler();
+        DummyHandler handler = new DummyHandler();
         TailReader reader = new TailReader(this.testPath, handler, tailReaderPollInterval);
         reader.start();
         Patiently.retry(() ->
@@ -82,7 +82,7 @@ public class TestTailReader {
     @Test
     public void testFileGetsRemoved() throws Exception {
         writeToFile(this.testPath, "abc");
-        DummyCharHandler handler = new DummyCharHandler();
+        DummyHandler handler = new DummyHandler();
         TailReader reader = new TailReader(this.testPath, handler, tailReaderPollInterval);
         reader.start();
         writeToFile(this.testPath, "some more data");
@@ -96,7 +96,7 @@ public class TestTailReader {
 
     @Test
     public void testFileDoesNotExist() {
-        DummyCharHandler handler = new DummyCharHandler();
+        DummyHandler handler = new DummyHandler();
         TailReader reader = new TailReader(this.testPath, handler, tailReaderPollInterval);
         reader.start();
         Patiently.retry(() ->

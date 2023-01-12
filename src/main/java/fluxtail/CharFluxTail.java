@@ -5,11 +5,11 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Sinks;
 
 
-public class FluxCharHandler implements TailHandler, Fluxable<Character> {
+public class CharFluxTail implements TailHandler, Fluxable<Character> {
     private final Sinks.Many<Character> characters;
     private Exception handledException;
 
-    public FluxCharHandler() {
+    public CharFluxTail() {
         this.characters = Sinks
                 .many()
                 .unicast()

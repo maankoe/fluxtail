@@ -42,7 +42,7 @@ public class GeneralTest {
             String startFileContents, String updateFileContents, boolean overwrite
     ) throws IOException {
         writeToFile(this.testPath, startFileContents);
-        DummyCharHandler handler = new DummyCharHandler();
+        DummyHandler handler = new DummyHandler();
         TailReader reader = new TailReader(this.testPath, handler, tailReaderPollInterval);
         reader.start();
         Patiently.retry(() ->

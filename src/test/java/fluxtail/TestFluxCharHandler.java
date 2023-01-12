@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.catchException;
 public class TestFluxCharHandler {
     @Test
     public void testHandle() {
-        FluxCharHandler handler = new FluxCharHandler();
+        CharFluxTail handler = new CharFluxTail();
         handler.accept('a');
         handler.accept('b');
         handler.accept('c');
@@ -21,7 +21,7 @@ public class TestFluxCharHandler {
 
     @Test
     public void testException() {
-        FluxCharHandler handler = new FluxCharHandler();
+        CharFluxTail handler = new CharFluxTail();
         handler.exception(new Exception("message"));
         StepVerifier.create(handler.flux())
                 .expectError()
@@ -30,7 +30,7 @@ public class TestFluxCharHandler {
 
     @Test
     public void testHandleException() {
-        FluxCharHandler handler = new FluxCharHandler();
+        CharFluxTail handler = new CharFluxTail();
         handler.accept('a');
         handler.exception(new Exception("message"));
         StepVerifier.create(handler.flux())
@@ -41,7 +41,7 @@ public class TestFluxCharHandler {
 
     @Test
     public void testHandleExceptionHandle() {
-        FluxCharHandler handler = new FluxCharHandler();
+        CharFluxTail handler = new CharFluxTail();
         handler.accept('a');
         Exception cause = new Exception("message");
         handler.exception(cause);
