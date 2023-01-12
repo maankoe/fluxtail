@@ -1,5 +1,6 @@
 package fluxtail;
 
+import fluxtail.flux.CharFluxTail;
 import org.junit.jupiter.api.Test;
 import reactor.test.StepVerifier;
 

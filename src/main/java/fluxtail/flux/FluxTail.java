@@ -1,12 +1,13 @@
-package fluxtail;
+package fluxtail.flux;
 
 import fluxtail.io.TailHandler;
 import fluxtail.parse.Parser;
 import fluxtail.split.CharBuffer;
 import fluxtail.split.Splitter;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Sinks;
 
-public class FluxTail<T> implements TailHandler {
+public class FluxTail<T> implements TailHandler, Fluxable<T> {
     private CharBuffer buffer;
     private final Splitter splitter;
     private final Parser<T> parser;
@@ -40,5 +41,10 @@ public class FluxTail<T> implements TailHandler {
     public void exception(Exception exception) {
         this.handledException = exception;
         this.sink.tryEmitError(exception);
+    }
+
+    @Override
+    public Flux<T> flux() {
+        return this.sink.asFlux();
     }
 }

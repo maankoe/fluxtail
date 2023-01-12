@@ -1,4 +1,4 @@
-package fluxtail;
+package fluxtail.flux;
 
 import fluxtail.io.TailHandler;
 import reactor.core.publisher.Flux;
