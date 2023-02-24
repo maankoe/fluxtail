@@ -31,8 +31,8 @@ public class TestStringFluxTail {
     }
 
     @Test
-    public void testHandleInclusive() {
-        StringFluxTail handler = new StringFluxTail(dotSplittingBuffer(SplitType.INCLUSIVE));
+    public void testHandleInclusivePost() {
+        StringFluxTail handler = new StringFluxTail(dotSplittingBuffer(SplitType.INCLUSIVE_POST));
         handler.accept('a');
         handler.accept('b');
         handler.accept(DOT);
@@ -45,8 +45,22 @@ public class TestStringFluxTail {
     }
 
     @Test
+    public void testHandleInclusivePre() {
+        StringFluxTail handler = new StringFluxTail(dotSplittingBuffer(SplitType.INCLUSIVE_PRE));
+        handler.accept('a');
+        handler.accept('b');
+        handler.accept(DOT);
+        handler.accept('c');
+        handler.accept(DOT);
+        StepVerifier.create(handler.flux())
+                .expectNext("ab", ".c")
+                .thenCancel()
+                .verify();
+    }
+
+    @Test
     public void testHandleNoSplitOnEnd() {
-        StringFluxTail handler = new StringFluxTail(dotSplittingBuffer(SplitType.INCLUSIVE));
+        StringFluxTail handler = new StringFluxTail(dotSplittingBuffer(SplitType.INCLUSIVE_POST));
         handler.accept('a');
         handler.accept('b');
         handler.accept('.');

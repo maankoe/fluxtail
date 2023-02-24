@@ -2,5 +2,6 @@ package fluxtail.split;
 
 public enum SplitType {
     EXCLUSIVE,
-    INCLUSIVE
+    INCLUSIVE_POST,
+    INCLUSIVE_PRE
 }

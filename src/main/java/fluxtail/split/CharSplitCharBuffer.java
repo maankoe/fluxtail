@@ -29,7 +29,7 @@ public class CharSplitCharBuffer implements CharBuffer {
         for (char x : this.chars) {
             builder.append(x);
         }
-        if (this.splitType == SplitType.EXCLUSIVE) {
+        if (this.splitType != SplitType.INCLUSIVE_POST) {
             builder.deleteCharAt(builder.length()-1);
         }
         return builder.toString();
@@ -37,6 +37,12 @@ public class CharSplitCharBuffer implements CharBuffer {
 
     @Override
     public void clear() {
-        this.chars.clear();
+        if (this.splitType == SplitType.INCLUSIVE_PRE) {
+            char inclusiveChar = this.chars.getLast();
+            this.chars.clear();
+            this.add(inclusiveChar);
+        } else {
+            this.chars.clear();
+        }
     }
 }
