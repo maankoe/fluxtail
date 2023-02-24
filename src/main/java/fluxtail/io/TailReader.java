@@ -17,8 +17,10 @@ public class TailReader {
     }
 
     public void start() {
-        this.running = true;
-        new Thread(this::tail).start();
+        if (!this.running) {
+            this.running = true;
+            new Thread(this::tail).start();
+        }
     }
 
     public void stop() {
