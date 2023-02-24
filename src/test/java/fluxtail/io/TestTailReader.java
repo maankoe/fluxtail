@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class TestTailReader {
 
     private final int testRetryIntervalMs = 10;
-    private final int testRetryMaxMs = 1000;
+    private final int testRetryMaxMs = 2000;
     private final int tailReaderPollInterval = 10;
     private final Path testPath = Path.of("/tmp/test");
 

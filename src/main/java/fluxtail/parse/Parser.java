@@ -1,5 +1,5 @@
 package fluxtail.parse;
 
-public interface Parser<T> {
-    T parse(String x);
-}
+import java.util.function.Function;
+
+public interface Parser<T> extends Function<CharSequence, T> {}

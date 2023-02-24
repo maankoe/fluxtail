@@ -3,21 +3,20 @@ package fluxtail.flux;
 import fluxtail.io.TailHandler;
 import fluxtail.parse.Parser;
 import fluxtail.split.CharBuffer;
-import fluxtail.split.Splitter;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Sinks;
 
+import java.util.function.Supplier;
+
 public class FluxTail<T> implements TailHandler, Fluxable<T> {
-    private CharBuffer buffer;
-    private final Splitter splitter;
+    private final CharBuffer buffer;
     private final Parser<T> parser;
 
     private final Sinks.Many<T> sink;
     private Exception handledException;
 
-    public FluxTail(Splitter splitter, Parser<T> parser) {
-        this.splitter = splitter;
-        this.buffer = this.splitter.newBuffer();
+    public FluxTail(Supplier<CharBuffer> bufferFactory, Parser<T> parser) {
+        this.buffer = bufferFactory.get();
         this.parser = parser;
         this.sink = Sinks
                 .many()
@@ -28,12 +27,12 @@ public class FluxTail<T> implements TailHandler, Fluxable<T> {
     @Override
     public void accept(char x) {
         this.buffer.add(x);
-        if (splitter.isSplit(this.buffer)) {
-            Sinks.EmitResult result = this.sink.tryEmitNext(this.parser.parse(this.buffer.toString()));
+        if (this.buffer.isSplit()) {
+            Sinks.EmitResult result = this.sink.tryEmitNext(this.parser.apply(this.buffer.read()));
             if (result.isFailure()) {
                 throw new IllegalStateException("This flux is in a bad state", this.handledException);
             }
-            this.buffer = this.splitter.newBuffer();
+            this.buffer.clear();
         }
     }
 

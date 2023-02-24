@@ -7,7 +7,7 @@ import reactor.test.StepVerifier;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchException;
 
-public class TestFluxCharHandler {
+public class TestCharFluxTail {
     @Test
     public void testHandle() {
         CharFluxTail handler = new CharFluxTail();
